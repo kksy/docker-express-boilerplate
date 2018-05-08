@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kksy/containerized-express-app.git"
+    "url": "git+https://github.com/kksy/docker-express-boilerplate.git"
   },
   "author": "Kylie Sy",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kksy/containerized-express-app/issues"
+    "url": "https://github.com/kksy/docker-express-boilerplate/issues"
   },
-  "homepage": "https://github.com/kksy/containerized-express-app#readme",
+  "homepage": "https://github.com/kksy/docker-express-boilerplate#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.3"
