@@ -10,6 +10,9 @@ build:
 start:
 	docker container run --detach --publish $(HOST_PORT):$(CONTAINER_PORT) --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
+delete_old_container:
+	docker rm -f $(CONTAINER_NAME)
+
 rebuild:
-	make build && docker rm -f $(CONTAINER_NAME)
+	 make delete_old_container && make build -rm
 
