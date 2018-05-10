@@ -10,6 +10,11 @@
     $ make start
     ```
     then go to http://localhost:5000
+    
+3. just running the tests after you have built the image again
+    ```
+    $ make test
+    ```
 
 3. rebuilding the image
     ```
