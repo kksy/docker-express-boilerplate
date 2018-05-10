@@ -2,18 +2,19 @@
 
 1. installation and build
     ```
-      $ make build
+    $ make build
     ```
 
 2. starting the app
     ```
-      $ make start
+    $ make start
     ```
     then go to http://localhost:5000
 
 3. rebuilding the image
     ```
-      $ make rebuild
+    $ make rebuild
     ```
-    this deletes the old image and container
+    this deletes the old image, container and runs the test after building
+
 
