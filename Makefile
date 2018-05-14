@@ -1,4 +1,4 @@
-CONTAINER_NAME=testapp
+CONTAINER_NAME=test-tapp
 IMAGE_NAME=docker-express
 CONTAINER_PORT=5000
 HOST_PORT=5000
@@ -7,23 +7,32 @@ build:
 	docker image build -t $(IMAGE_NAME) .
 
 start:
-	docker container run \
+	docker run \
 		--detach \
 		--publish $(HOST_PORT):$(CONTAINER_PORT) \
-		--name $(CONTAINER_NAME) $(IMAGE_NAME)
+		--name $(CONTAINER_NAME) \
+		$(IMAGE_NAME)
+
+start-dev:
+	docker run \
+		--detach \
+		--publish $(HOST_PORT):$(CONTAINER_PORT) \
+		--name $(CONTAINER_NAME) \
+		-v $(PWD):/app:ro \
+		$(IMAGE_NAME)
 
 test:
 	docker run -it --rm $(IMAGE_NAME) npm t
 
 .PHONY: test
 
-delete_old_container:
+delete-old-container:
 	docker rm -f $(CONTAINER_NAME)
 
-delete_old_image:
+delete-old-image:
 	docker rmi -f $(IMAGE_NAME)
 
-rebuild:
-	make delete_old_container && make delete_old_image && make build && make test
+restart:
+	make delete-old-container && make start-dev
 
 

@@ -15,12 +15,12 @@
     ```
     $ make test
     ```
-    run tests on a new container and delete it afterwards
+    This runs tests on a new container and deletes it afterwards
 
-4. rebuilding the image
+4. restart the container after making changes
     ```
-    $ make rebuild
+    $ make restart
     ```
-    this deletes the old image, container and runs the test after building
+    This deletes the old container and runs container with local changes.
 
 
