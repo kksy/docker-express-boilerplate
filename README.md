@@ -1,4 +1,4 @@
-# Docker Express Boilerplate
+# Docker Express Boilerplate [![Build Status](https://travis-ci.org/kksy/docker-express-boilerplate.svg?branch=master)](https://travis-ci.org/kksy/docker-express-boilerplate)
 
 1. installation and build
     ```
