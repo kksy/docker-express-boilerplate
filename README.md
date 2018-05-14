@@ -10,13 +10,14 @@
     $ make start
     ```
     then go to http://localhost:5000
-    
-3. just running the tests after you have built the image again
+
+3. running tests
     ```
     $ make test
     ```
+    run tests on a new container and delete it afterwards
 
-3. rebuilding the image
+4. rebuilding the image
     ```
     $ make rebuild
     ```
