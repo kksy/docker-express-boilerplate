@@ -10,7 +10,7 @@ WORKDIR /dependencies
 COPY package*.json ./
 
 # Install packages
-RUN npm install --verbose
+RUN npm install
 
 # Makes sure that node_modules can be accessed
 ENV NODE_PATH /dependencies/node_modules/
