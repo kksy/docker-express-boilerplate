@@ -22,7 +22,7 @@ start-dev:
 		$(IMAGE_NAME)
 
 test:
-	docker run -it --rm $(IMAGE_NAME) npm t
+	docker run -it --rm -v $(PWD):/app:ro $(IMAGE_NAME) npm run docker:test
 
 .PHONY: test
 
