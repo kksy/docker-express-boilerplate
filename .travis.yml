@@ -7,7 +7,10 @@ jobs:
   include:
     - stage: test
       install: skip
-      script: make build && make test
+      script:
+        - make build
+        - make test
     - stage: test-integration
-        install: skip
-        script: make test-integration
+      install: skip
+      script:
+        - make test-integration
