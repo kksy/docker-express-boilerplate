@@ -1,30 +1,80 @@
 # Docker Express Boilerplate [![Build Status](https://travis-ci.org/kksy/docker-express-boilerplate.svg?branch=master)](https://travis-ci.org/kksy/docker-express-boilerplate)
 
-## Usage
+To build and run the app, you will only need the `Docker CLI`.
 
-- Installation and build
-    ```
-    $ make build
-    ```
+## Project structure
 
-- Starting the app
-    ```
-    $ make start
-    ```
-    then go to http://localhost:5000
+```
+ ┬
+ ├ db
+ ├ src
+    ┬
+    ├ models
+    ├ controllers
+    └ utils
+ ├ test
+    ┬
+    ├ server.js
+    ├ models
+    ├ controllers
+    └ utils
+ ├ server.js
+ └ ...(other files for project build)
+```
+- **db** - contains the scripts needed for setting up the database
+- **src** - main project library
+- **test** - all test files following the structure of src
 
-- Running tests
-    ```
-    $ make test
-    ```
-    This runs tests on a new container and deletes it afterwards
+## Running the app
 
-- Restart the container after making changes
-    ```
-    $ make restart
-    ```
-    This deletes the old container and runs container with local changes.
+#### Installation and build
+```
+$ docker-compose build
+```
+This creates an image for the app and MongoDB database
 
-- If package dependencies change, run `make build` again
+#### Starting the app
+```
+$ docker-compose up
+```
+- Then go to http://localhost:5000
+- To restart, use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
+
+#### MongoDB
+To setup the database, the schema and sample files live in the `db` folder. `setup-db.sh` gets ran when the database is first set up.
+
+#### Testing
+
+##### Unit
+```
+$ make test
+```
+Runs tests with the file pattern test/**/*.test.js
+
+##### Integration
+```
+$ make test-integration
+```
+- Runs tests with the file pattern test/**/*.integration.js
+- In this project, the integration test runs a database check on `models/Sample.js`
+
+
+
+#### Restart the app after making changes
+```
+$ docker-compose down && docker-compose up
+```
+- This deletes the old container and runs container with local changes.
+
+- If package dependencies change, run `make build` again. This rebuilds the app image only and not the database. If you need to rebuild both app and database, use `docker-compose build`.
+
+#### Build pipeline
+The project uses [Travis CI](https://travis-ci.org/). It has stages for unit tests and integration tests. Check `.travis.yml` for the config.
+
+## In progress
+- Preparing the app for deployment
+- Database credentials
+- Easier way to add fixtures for integration test?
+- Pruning old volumes, and dangling images
 
 

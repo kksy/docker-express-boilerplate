@@ -7,11 +7,7 @@ build:
 	docker image build -t $(APP_IMAGE_NAME) .
 
 start:
-	docker run \
-		--detach \
-		--publish $(APP_HOST_PORT):$(APP_CONTAINER_PORT) \
-		--name $(APP_CONTAINER_NAME) \
-		$(APP_IMAGE_NAME)
+	docker-compose up
 
 start-dev:
 	docker run \
