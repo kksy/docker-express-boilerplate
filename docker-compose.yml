@@ -14,12 +14,22 @@ services:
     depends_on:
       - database
     tty: true
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
   database:
     image: mongo
     container_name: database
     ports:
       - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=test
     volumes:
         - ./data/db:/data/db
+        - ./db:/docker-entrypoint-initdb.d
+
 

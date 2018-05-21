@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "test": "mocha --recursive",
-    "docker:test": "$NODE_PATH/.bin/mocha 'test/**/*.test.js' --recursive --exit",
-    "docker:test-integration": "$NODE_PATH/.bin/mocha 'test/**/*.integration.js' --recursive --exit"
+    "docker:test": "NODE_ENV=test $NODE_PATH/.bin/mocha 'test/**/*.test.js' --recursive --exit",
+    "docker:test-integration": "NODE_ENV=test $NODE_PATH/.bin/mocha 'test/**/*.integration.js' --recursive --exit"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
-    "mocha": "^5.1.1"
+    "mocha": "^5.1.1",
+    "sinon": "^5.0.7"
   }
 }

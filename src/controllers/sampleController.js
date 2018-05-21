@@ -1,10 +1,10 @@
 'use strict'
 
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
+const Sample = require('../models/Sample');
 
-router.get('/sample', (req, res) => {
-  res.json({ data: [] });
+router.get('/sample', async (req, res) => {
+  res.json({ data: await Sample.all() });
 });
 
 module.exports = router;

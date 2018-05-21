@@ -1,23 +1,17 @@
-const MongoClient = require('mongodb').MongoClient;
+'use strict'
 
-const dbName = 'test';
-const dbUri = `mongodb://integration-test-database:27017/`;
-const Repository = {
-  open: () => MongoClient
-    .connect(dbUri)
-    .then(client => client)
-    .catch(console.error)
-};
+const DatabaseClient = require('../utils/DatabaseClient');
 
-const Sample = Object.create(Repository, {
+const Sample = Object.create(DatabaseClient, {
   all: {
-    value: () => Repository.open()
+    value: () => DatabaseClient.open()
       .then((client) => {
-        const items = client.db(dbName).collection('sample').find().toArray()
+        const items = client.db('test').collection('sample').find().toArray()
         client.close();
         return items;
       }),
-    enumerable: false,
+    enumerable: true,
+    configurable: true,
   }
 });
 
