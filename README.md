@@ -40,26 +40,6 @@ $ docker-compose up
 - Then go to http://localhost:5000
 - To restart, use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
 
-#### MongoDB
-To setup the database, the schema and sample files live in the `db` folder. `setup-db.sh` gets ran when the database is first set up.
-
-#### Testing
-
-##### Unit
-```
-$ make test
-```
-Runs tests with the file pattern test/**/*.test.js
-
-##### Integration
-```
-$ make test-integration
-```
-- Runs tests with the file pattern test/**/*.integration.js
-- In this project, the integration test runs a database check on `models/Sample.js`
-
-
-
 #### Restart the app after making changes
 ```
 $ docker-compose down && docker-compose up
@@ -68,7 +48,26 @@ $ docker-compose down && docker-compose up
 
 - If package dependencies change, run `make build` again. This rebuilds the app image only and not the database. If you need to rebuild both app and database, use `docker-compose build`.
 
-#### Build pipeline
+## MongoDB
+To setup the database, the schema and sample files live in the `db` folder. `setup-db.sh` gets ran when the database is first set up.
+
+## Testing
+
+#### Unit
+```
+$ make test
+```
+Runs tests with the file pattern test/**/*.test.js
+
+#### Integration
+```
+$ make test-integration
+```
+- Runs tests with the file pattern test/**/*.integration.js
+- In this project, the integration test runs a database check on `models/Sample.js`
+
+
+## Build pipeline
 The project uses [Travis CI](https://travis-ci.org/). It has stages for unit tests and integration tests. Check `.travis.yml` for the config.
 
 ## In progress
