@@ -1,0 +1,28 @@
+version: '3.6'
+
+services:
+  test-app:
+    build:
+      context: ../
+      dockerfile: Dockerfile-integrationtest
+    image: docker-express-test
+    container_name: test-app
+    volumes:
+      - ../:/app:ro
+    depends_on:
+      - database
+    tty: true
+
+  database:
+    image: mongo
+    container_name: integration-test-database
+    environment:
+      - MONGO_INITDB_DATABASE=test
+    ports:
+      - 27017:27017
+    volumes:
+        - ./data/db:/data/db
+        - ../db:/docker-entrypoint-initdb.d
+
+
+

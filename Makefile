@@ -24,6 +24,9 @@ start-dev:
 test:
 	docker run -it --rm -v $(PWD):/app:ro $(IMAGE_NAME) npm run docker:test
 
+test-integration:
+	cd test && docker-compose down && docker-compose build && docker-compose up -d && cd .. && sleep 5 && docker exec -it test-app npm run docker:test-integration
+
 .PHONY: test
 
 delete-old-container:

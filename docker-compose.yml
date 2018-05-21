@@ -1,0 +1,25 @@
+version: '3.6'
+
+services:
+  test-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker-express
+    container_name: test-app
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/app:ro
+    depends_on:
+      - database
+    tty: true
+
+  database:
+    image: mongo
+    container_name: database
+    ports:
+      - 27017:27017
+    volumes:
+        - ./data/db:/data/db
+
