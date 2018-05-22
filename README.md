@@ -37,10 +37,9 @@ This creates an image for the app and MongoDB database
 $ docker-compose up
 ```
 - Then go to http://localhost:5000
-- To restart, use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
 
 #### Restart the app after making changes
-- Use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
+- Use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. There is no need to build the images again as local directories are mounted using volumes.
 - If package dependencies change, run `make build` again. This rebuilds the app image only and not the database. If you need to rebuild both app and database, use `docker-compose build`.
 
 ## MongoDB
@@ -73,5 +72,3 @@ The project uses [Travis CI](https://travis-ci.org/). It has stages for unit tes
 - Database credentials
 - Easier way to add fixtures for integration test?
 - Pruning old volumes, and dangling images
-
-
