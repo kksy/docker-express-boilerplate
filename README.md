@@ -14,7 +14,6 @@ To build and run the app, you will only need the `Docker CLI`.
     └ utils
  ├ test
     ┬
-    ├ server.js
     ├ models
     ├ controllers
     └ utils
@@ -41,11 +40,7 @@ $ docker-compose up
 - To restart, use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
 
 #### Restart the app after making changes
-```
-$ docker-compose down && docker-compose up
-```
-- This deletes the old container and runs container with local changes.
-
+- Use `docker-compose down` to stop the containers and `docker-compose up` to start the containers. If packages have changed, make sure to run `docker-compose build` first.
 - If package dependencies change, run `make build` again. This rebuilds the app image only and not the database. If you need to rebuild both app and database, use `docker-compose build`.
 
 ## MongoDB
@@ -65,7 +60,10 @@ $ make test-integration
 ```
 - Runs tests with the file pattern test/**/*.integration.js
 - In this project, the integration test runs a database check on `models/Sample.js`
+- The `docker-compose.yml` file in the test folder is used in this case
 
+## App Environment Configuration
+Use environment-specific configuration by importing `config.js`. The default config is 'development'. All tests use the 'test' environment.
 
 ## Build pipeline
 The project uses [Travis CI](https://travis-ci.org/). It has stages for unit tests and integration tests. Check `.travis.yml` for the config.

@@ -2,17 +2,22 @@
 
 const DatabaseClient = require('../utils/DatabaseClient');
 
-const Sample = Object.create(DatabaseClient, {
-  all: {
-    value: () => DatabaseClient.open()
-      .then((client) => {
-        const items = client.db('test').collection('sample').find().toArray()
-        client.close();
-        return items;
-      }),
-    enumerable: true,
-    configurable: true,
-  }
-});
+const collectionName = 'sample';
+const databaseName = 'test';
+
+const Sample = {
+  all: () => DatabaseClient
+    .open()
+    .then((client) => {
+      const items = client
+        .db(databaseName)
+        .collection(collectionName)
+        .find()
+        .toArray();
+
+      client.close();
+      return items;
+    }),
+};
 
 module.exports = Sample;

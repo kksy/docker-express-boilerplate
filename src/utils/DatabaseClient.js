@@ -1,10 +1,11 @@
 const MongoClient = require('mongodb').MongoClient;
+const config = require('../../config');
 
-const host = process.env.NODE_ENV === 'test' ?  'integration-test-database' : 'database';
-const dbUri = `mongodb://${host}:27017/`;
+const dbUri = config.MONGO_URI;
+
 const DatabaseClient = {
-  open: () => MongoClient
-    .connect(dbUri)
+  open: (uri = dbUri) => MongoClient
+    .connect(uri)
     .then(client => client)
     .catch(console.error)
 };
