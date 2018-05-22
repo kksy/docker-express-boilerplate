@@ -27,6 +27,6 @@ jobs:
     script:
     - make build
     - docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
-    - docker tag $APP_IMAGE_NAME:latest registry.heroku.com/$HEROKU_APP_NAME
-    - docker push registry.heroku.com/$HEROKU_APP_NAME
+    - docker tag $APP_IMAGE_NAME:latest registry.heroku.com/$HEROKU_APP_NAME:latest
+    - docker push registry.heroku.com/$HEROKU_APP_NAME:latest
 
