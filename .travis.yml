@@ -1,16 +1,32 @@
 sudo: required
-
+language: node_js
+node_js:
+- 8.11.1
 services:
-  - docker
-
+- docker
 jobs:
   include:
-    - stage: test
-      install: skip
-      script:
-        - make build
-        - make test
-    - stage: test-integration
-      install: skip
-      script:
-        - make test-integration
+  - stage: test
+    install: skip
+    script:
+    - make build
+    - make test
+  - stage: test-integration
+    install: skip
+    script:
+    - make test-integration
+  # pushing image to heroku registry when on 'production' branch
+  - stage: deploy
+    if: branch = production
+    install: skip
+    env:
+    - secure: N5HNMjNBof+yr3BRNdA3TC73szQ/lD3bhU9HIeClTqsH12sdm/dyNMdNbUXm2npqu+QelrHQTiLvz6ygZWOCuq6sYTnEML4ChLjJIDLqhdyYl68b7/cmPSrBvkeMTVpf/Pyt49SLou44IDQJ4Drn1IHKF09w/Ht+zNDTNMcXN2hsrpf6HsRoiJn08hkZdkKkOgU7N7WEA7WeMEf2XhOvtbRVwztjQyG+T3+1UOl5pONgAltF4TgYjxnK+rzl7Dro800lkYd7sFdCLybrQsnb4dSxFgbx75Dn0PUrEIZT4shlLHKzPtVE4cQAnHsfo7dfngdJtOrgUSchrxV6JBwk68u5AbTNRtJuUv4i4vIMSK/qBhM00DreQy3TTT2098LWJRkjQ7z2LNcIoB/bbUTRSPiK97BHf9G+A1Js6UWqY8hR7Diswd0vVZAiuRDHWvQf4C6iYFyKl3Z56gyCff04M/KZcwVtJ8qJXQDfpH1qZJ7tqUTHL6cUPdWGgchNlBLc8XDxLRDHmnseh5qQfbuaVvmU9z0HdNf03QJGFzAv5gfRnB7uXwxsclXDNFVd+VetqfhpLvJDLJyCHsM2zGGuO+fFNXYLABC6YyCVow+CWYtr918BoxvzQrXHmzBfoyQN7NCbOCpIkXVUnYzRDbNdXRLo2UDb2pYIdcnuu6+bSM4=
+    - secure: kLtIKshCuVCfsMw2KTK02A0pC8X73kRl1ufmMngg1wL4ZEInfd6UZHsTyCELjgBGL1TUiMqANEJVbZwhj8Y2FBo4B1yO8C8hHiV2AkMxAsWES7iFBGG0NNkM8Cp5ed6ISoJ6wKVg6+YTnWbhwMAmCrknXE43quZl14X3Ola81dTOhfnf2NQE1wUB5aI337Hz2sGqym7fUZFg2C/Xc/qmI1I+GRaVjEKDjH0DhvOw1zK4wDNXTNjZmJj5kTrJ9O10NrHiJKuCe3Ww/4Vx13hL24RIdGrKY/P7J5WdT/tu58Zjcvfp6lJCacmgSZ4DnWryIYNKuBEnxabHvE+ud7fZjlDJOFV89TsCEkti2iLMrbSCtVDpnDKgiau9h97pTd7XfV4aLWWTJGJIUx5rQSZJLh0RN/U8yzuV7y/QOlK3IA+T5A6oWMvQZKz7tT56ks42ipIdMz9uPoZgGJBIZymGY17zDZ4gc4Lw+sZCNQcITo32GHgM1bsWbiP/eev3RTYL1VyWZXBadefi6qCBlNdSjzC1BUVEpy9+EnbxrJaljrgDUO447IBV8XqxnQaVoqGEvjBf9j4RnSIGV8qe8TcbAeir75DfqpHC6qCUqMl5kNHQtPpegf07J5aZ/frYbCdpVIFwTKi1o0rp1xUzx11hQzA5UGr67tC3peb/8+jqUWo=
+    - HEROKU_APP_NAME=docker-express-boilerplate
+    - APP_IMAGE_NAME=docker-express
+    script:
+    - make build
+    - docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
+    - docker tag $APP_IMAGE_NAME:latest registry.heroku.com/$HEROKU_APP_NAME
+    - docker push registry.heroku.com/$HEROKU_APP_NAME
+
