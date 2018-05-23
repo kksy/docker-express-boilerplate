@@ -2,8 +2,8 @@
 
 const express = require('express');
 const app = express();
-const sampleController = require('./src/controllers/sampleController')
-const port = process.env.PORT || 5000;
+const port = require('./config').APP_PORT;
+const sampleController = require('./src/controllers/sampleController');
 
 app.get('/', (req, res) => {
    res.send('Hello World! This is your first app');
