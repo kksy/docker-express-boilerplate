@@ -1,5 +1,5 @@
 const environment = process.env.NODE_ENV || 'development';
-const appPort = process.env.port || 5000;
+const appPort = process.env.PORT || 5000;
 
 const config = {
   development: {
