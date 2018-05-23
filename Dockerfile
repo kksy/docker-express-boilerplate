@@ -1,6 +1,10 @@
 # Image to build on a Node.js environment (with Node and NPM)
 FROM node:8
 
+ARG NODE_ENV
+
+ENV NODE_ENV ${NODE_ENV}
+
 # Create the directory for node_modules.
 # This ensures that when we use volumes, the host directory does not override /node_modules
 WORKDIR /dependencies

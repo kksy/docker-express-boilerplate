@@ -4,7 +4,10 @@ APP_CONTAINER_PORT=5000
 APP_HOST_PORT=5000
 
 build:
-	docker image build -t $(APP_IMAGE_NAME) .
+	docker build -t $(APP_IMAGE_NAME) .
+
+build-production:
+	docker build --build-arg NODE_ENV=production -t $(APP_IMAGE_NAME) .
 
 start:
 	docker-compose up
