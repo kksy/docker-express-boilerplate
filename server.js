@@ -13,6 +13,7 @@ app.use('/api', sampleController);
 
 app.listen(port);
 
+console.log(`Running on ${process.env.NODE_ENV} server`);
 console.log(`App listening at port ${port}`);
 
 module.exports = app;
